@@ -25,18 +25,18 @@ NAME = fillit
 
 INCLUDES = ./includes/fillit.h ./libft/includes/libft.h
 
-COMP_LIB = make -C libft/
+COMP_LIB = @make -C libft/
 
 FLAGS = -Wall -Wextra -Werror
 
 all: lib $(NAME)
 
 $(NAME): ./libft/libft.a $(OBJS)
-		gcc $(FLAGS) -o $(NAME) $(OBJS) -L./libft -lft
+		@gcc $(FLAGS) -o $(NAME) $(OBJS) -L./libft -lft
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(INCLUDES)
-		/bin/mkdir -p $(OBJDIR)
-		gcc $(FLAGS) -I./includes -I./libft/includes -c $< -o $@
+		@/bin/mkdir -p $(OBJDIR)
+		@gcc $(FLAGS) -I./includes -I./libft/includes -c $< -o $@
 
 lib:
 		$(COMP_LIB)
@@ -44,11 +44,11 @@ lib:
 ./libft/libft.a: lib
 
 clean:
-	    /bin/rm -rf $(OBJDIR)
-		$(COMP_LIB) clean
+	    @/bin/rm -rf $(OBJDIR)
+	    $(COMP_LIB) clean
 
 fclean: clean
-		/bin/rm -rf $(NAME)
+		@/bin/rm -rf $(NAME)
 		$(COMP_LIB) fclean
 
 re: fclean all
